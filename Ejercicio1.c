@@ -17,6 +17,7 @@ void intercambiar(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
+
 }
 
 /*
@@ -27,7 +28,19 @@ void intercambiar(int *a, int *b) {
 */
 int particion(int arr[], int bajo, int alto) {
     // Escribe aquí tu función
-    return -1; // Placeholder, reemplazar por el índice real del pivote
+    int pivote, i, k;
+
+    pivote = arr[alto];
+    i = bajo - 1;
+    for (k = bajo; k <= alto - 1; k++) {
+        if (arr[k] <= pivote) {
+            i++;
+            intercambiar(&arr[i], &arr[k]);
+        } 
+    }
+    
+    intercambiar(&arr[i + 1], &arr[alto]);
+    return i + 1; // Placeholder, reemplazar por el índice real del pivote
 }
 
 /*
@@ -37,6 +50,13 @@ int particion(int arr[], int bajo, int alto) {
 */
 void quicksort(int arr[], int bajo, int alto) {
     // Escribe aquí tu función
+    int pivote;
+
+    if (bajo < alto) {
+        pivote = particion(arr, bajo, alto);
+        quicksort(arr, bajo, pivote - 1);
+        quicksort(arr, pivote + 1, alto);
+    }
 }
 
 /* Función auxiliar para imprimir un arreglo */
